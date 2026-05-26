@@ -1,0 +1,10 @@
+.BigQuestionStep {
+  margin: 2rem;
+
+  .Actions {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 24px;
+  }
+}

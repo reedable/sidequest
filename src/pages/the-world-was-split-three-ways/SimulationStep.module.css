@@ -1,0 +1,197 @@
+.SimulationStep {
+  .card {
+    background: #fff;
+    border-radius: 4px;
+    box-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.1),
+      0 4px 8px rgba(0, 0, 0, 0.06);
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+
+  @media (min-width: 900px) {
+    .card {
+      padding: 40px;
+    }
+  }
+
+  .instruction {
+    margin-bottom: 32px;
+  }
+
+  .straws {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 32px;
+    align-items: flex-start;
+  }
+
+  @media (min-width: 600px) {
+    .straws {
+      gap: 40px;
+    }
+  }
+
+  .strawSlot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 72px;
+  }
+
+  .strawColumn {
+    position: relative;
+    height: 164px;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .strawLabel {
+    position: absolute;
+    left: 0;
+    right: 0;
+    text-align: center;
+    visibility: hidden;
+  }
+
+  .strawLabelVisible {
+    visibility: visible;
+  }
+
+  .strawLabelShort {
+    bottom: 60px;
+  }
+
+  .strawLabelMedium {
+    bottom: 100px;
+  }
+
+  .strawLabelLong {
+    bottom: 144px;
+  }
+
+  .straw {
+    width: 36px;
+    height: 140px;
+    background-color: #616161;
+    border-radius: 4px;
+    cursor: default;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+      height 0.3s ease-out,
+      background-color 0.2s;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .straw {
+      transition: none;
+    }
+  }
+
+  .straw.clickable {
+    cursor: pointer;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .straw.clickable:hover {
+      background-color: #424242;
+      animation: jiggle 0.4s ease;
+    }
+  }
+
+  @keyframes jiggle {
+    0%,
+    100% {
+      transform: scale(1, 1);
+    }
+    20% {
+      transform: scale(1.08, 0.92);
+    }
+    40% {
+      transform: scale(0.94, 1.06);
+    }
+    60% {
+      transform: scale(1.04, 0.96);
+    }
+    80% {
+      transform: scale(0.98, 1.02);
+    }
+  }
+
+  .straw.considering {
+    background-color: #9e9e9e;
+  }
+
+  .straw.player {
+    background-color: #212121;
+  }
+
+  .straw.other {
+    background-color: #757575;
+  }
+
+  .strawShort {
+    height: 56px;
+  }
+
+  .strawMedium {
+    height: 96px;
+  }
+
+  .strawMark {
+    color: #fff;
+  }
+
+  .strawInfo {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .avatar {
+    width: 52px;
+    height: 52px;
+    visibility: hidden;
+  }
+
+  .avatarVisible {
+    visibility: visible;
+  }
+
+  .avatarConsidering {
+    opacity: 0.5;
+  }
+
+  .avatarImg {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .strawCaption {
+    display: block;
+    height: 32px;
+    line-height: 1.4;
+  }
+
+  .strawCaptionClickable {
+    cursor: pointer;
+  }
+
+  .drawAgain {
+    text-align: center;
+  }
+
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+  }
+}

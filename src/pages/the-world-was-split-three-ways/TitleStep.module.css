@@ -1,0 +1,9 @@
+.TitleStep {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: center;
+  min-height: 100dvh;
+  text-align: center;
+}

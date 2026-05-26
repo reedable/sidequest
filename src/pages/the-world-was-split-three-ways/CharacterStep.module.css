@@ -1,0 +1,46 @@
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+@media (min-width: 600px) {
+  .cards {
+    flex-direction: row;
+  }
+}
+
+.card {
+  flex: 1;
+  outline: 2px solid transparent;
+  transition:
+    outline-color 0.15s,
+    box-shadow 0.15s;
+}
+
+.cardSelected {
+  outline-color: #212121;
+}
+
+.cardActionArea {
+  height: 100%;
+}
+
+.cardInner {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.avatar {
+  width: 100%;
+  max-width: 140px;
+  margin-bottom: 1rem;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}

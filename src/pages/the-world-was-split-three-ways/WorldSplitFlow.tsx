@@ -1,0 +1,104 @@
+import { useState } from "react";
+import TitleStep from "./TitleStep";
+import IntroStep from "./IntroStep";
+import StrawDrawStep from "./StrawDrawStep";
+import QuestionStep from "./QuestionStep";
+import BigQuestionStep from "./BigQuestionStep";
+import CharacterStep from "./CharacterStep";
+import SimulationStep from "./SimulationStep";
+import ResultsStep from "./ResultsStep";
+import ExplanationStep from "./ExplanationStep";
+import type { Character, SimulationStats } from "./types";
+
+type Step =
+  | "title"
+  | "intro"
+  | "straw-draw"
+  | "question"
+  | "big-question"
+  | "character"
+  | "simulation"
+  | "results"
+  | "explanation"
+  | "info";
+
+export default function WorldSplitFlow() {
+  const [step, setStep] = useState<Step>("title");
+  const [character, setCharacter] = useState<Character | null>(null);
+  const [stats, setStats] = useState<SimulationStats | null>(null);
+
+  function goTo(next: Step) {
+    setStep(next);
+  }
+
+  return (
+    <>
+      {step === "title" && <TitleStep onNext={() => goTo("intro")} />}
+
+      {step === "intro" && (
+        <IntroStep
+          onNext={() => goTo("straw-draw")}
+          onBack={() => goTo("title")}
+        />
+      )}
+
+      {step === "straw-draw" && (
+        <StrawDrawStep
+          onNext={() => goTo("question")}
+          onBack={() => goTo("intro")}
+        />
+      )}
+
+      {step === "question" && (
+        <QuestionStep
+          onNext={() => goTo("big-question")}
+          onBack={() => goTo("straw-draw")}
+        />
+      )}
+
+      {step === "big-question" && (
+        <BigQuestionStep
+          onNext={() => goTo("character")}
+          onBack={() => goTo("question")}
+        />
+      )}
+
+      {step === "character" && (
+        <CharacterStep
+          onNext={(c) => {
+            setCharacter(c);
+            goTo("simulation");
+          }}
+          onBack={() => goTo("question")}
+        />
+      )}
+
+      {step === "simulation" && character && (
+        <SimulationStep
+          character={character}
+          onNext={(s) => {
+            setStats(s);
+            goTo("results");
+          }}
+          onBack={() => goTo("character")}
+        />
+      )}
+
+      {step === "results" && (
+        <ResultsStep
+          character={character}
+          onBack={() => goTo("character")}
+          onNext={() => goTo("explanation")}
+          stats={stats}
+        />
+      )}
+
+      {step === "explanation" && (
+        <ExplanationStep
+          onBack={() => goTo("results")}
+          onDone={() => goTo("title")}
+        />
+      )}
+    </>
+  );
+}
