@@ -172,20 +172,20 @@ export default function SimulationStep({ character, onNext, onBack }: Props) {
     }
 
     if (round.phase === "all_drawn") {
+      const { hades, poseidon, zeus } = round.drawn;
+      if (hades !== null && poseidon !== null && zeus !== null) {
+        setStats((s) => ({
+          rounds: s.rounds + 1,
+          sky: {
+            hades: s.sky.hades + (round.positions[hades] === "long" ? 1 : 0),
+            poseidon:
+              s.sky.poseidon + (round.positions[poseidon] === "long" ? 1 : 0),
+            zeus: s.sky.zeus + (round.positions[zeus] === "long" ? 1 : 0),
+          },
+        }));
+      }
       timer = setTimeout(() => {
         setRound((r) => ({ ...r, phase: "complete" }));
-        const { hades, poseidon, zeus } = round.drawn;
-        if (hades !== null && poseidon !== null && zeus !== null) {
-          setStats((s) => ({
-            rounds: s.rounds + 1,
-            sky: {
-              hades: s.sky.hades + (round.positions[hades] === "long" ? 1 : 0),
-              poseidon:
-                s.sky.poseidon + (round.positions[poseidon] === "long" ? 1 : 0),
-              zeus: s.sky.zeus + (round.positions[zeus] === "long" ? 1 : 0),
-            },
-          }));
-        }
       }, 1000);
     }
 
