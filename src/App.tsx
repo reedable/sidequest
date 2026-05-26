@@ -1,10 +1,10 @@
 import { ThemeProvider, CssBaseline } from '@mui/material'
-import { createBrowserRouter, RouterProvider, Navigate } from 'react-router'
+import { createHashRouter, RouterProvider, Navigate } from 'react-router'
 import theme from './theme'
 import { DbProvider } from './db/DbContext'
 import WorldSplitFlow from './pages/the-world-was-split-three-ways/WorldSplitFlow'
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: '/',
     element: <Navigate to="/the-world-was-split-three-ways" replace />,
