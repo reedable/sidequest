@@ -15,7 +15,7 @@ const characterImages: Record<Character, string> = {
 
 interface Props {
   character: Character | null;
-  onBack: () => void;
+  onBack: (currentStats: SimulationStats) => void;
   onNext: () => void;
   stats: SimulationStats | null;
 }
@@ -168,8 +168,8 @@ export default function ResultsStep({
       </div>
 
       <div className={styles.nav}>
-        <Button variant="outlined" onClick={onBack}>
-          Play again
+        <Button variant="outlined" onClick={() => onBack(displayStats)}>
+          Keep playing
         </Button>
 
         <Button variant="contained" onClick={onNext}>
