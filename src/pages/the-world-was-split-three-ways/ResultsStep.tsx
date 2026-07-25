@@ -145,7 +145,11 @@ export default function ResultsStep({
       }
       actions={
         <>
-          <Button variant="outlined" onClick={onBack} startIcon={<ArrowBack />}>
+          <Button
+            variant="outlined"
+            onClick={() => onBack(displayStats)}
+            startIcon={<ArrowBack />}
+          >
             Play again
           </Button>
 
