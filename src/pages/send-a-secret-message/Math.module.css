@@ -1,0 +1,7 @@
+/*
+ * Inline maths, in the same face as the display equations in <figure>.
+ * One place, so the treatment can be tweaked for every step at once.
+ */
+.Math {
+  font-family: "Latin Modern Math", Georgia, serif;
+}

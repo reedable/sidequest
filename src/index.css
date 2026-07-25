@@ -4,6 +4,16 @@
   box-sizing: border-box;
 }
 
+/*
+ * MUI's type scale and the lesson's own sizing are all in rem, so the root
+ * font size is the single lever for how big everything renders. It grows with
+ * the viewport: smallest on a 960x540 classroom screen, larger on an iPad or
+ * a 1080p panel.
+ */
+html {
+  font-size: clamp(16px, 1.4vh + 0.6vw, 22px);
+}
+
 body {
   margin: 0;
   overflow-x: hidden;

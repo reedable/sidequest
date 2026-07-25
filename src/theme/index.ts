@@ -14,6 +14,16 @@ export function buildTheme(tokens: ThemeTokens) {
       fontFamily: tokens.typography.fontFamily,
     },
     shape: tokens.shape,
+    components: {
+      MuiTypography: {
+        styleOverrides: {
+          // MUI ships 0.35em, which reads too tight at lesson prose sizes.
+          gutterBottom: {
+            marginBottom: '1rem',
+          },
+        },
+      },
+    },
   })
 }
 

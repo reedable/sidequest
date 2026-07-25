@@ -1,0 +1,24 @@
+.Panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 100%;
+}
+
+.KeyRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.KeyValue {
+  flex: 0 0 1.75rem;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.Secret {
+  margin-top: 0.25rem;
+  letter-spacing: 0.08em;
+  overflow-wrap: anywhere;
+}

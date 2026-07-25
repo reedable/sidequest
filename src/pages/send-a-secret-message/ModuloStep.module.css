@@ -1,0 +1,29 @@
+.Split {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  width: 100%;
+}
+
+.Prose {
+  flex: 1 1 20rem;
+  max-width: 30rem;
+}
+
+/* 17.5rem matches the wheel's column on the rotation step, so the prose
+ * starts at the same place on every figure-led step. */
+.Figures {
+  display: flex;
+  flex: 0 0 17.5rem;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* The face comes from Math.module.css; this is the display-size tweak. */
+.Figure {
+  margin: 0;
+  font-size: 1.75rem;
+  text-align: center;
+}

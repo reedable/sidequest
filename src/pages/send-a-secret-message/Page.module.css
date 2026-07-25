@@ -1,0 +1,69 @@
+/*
+ * Tuned for a 960x540 classroom screen, but nothing here is pinned to it.
+ * The body is a wrapping flex row: two children sit side by side when there's
+ * room, one child centres itself, and a narrow screen wraps to a single
+ * column without a breakpoint. Typography comes from the MUI theme; the maths
+ * face lives in Math.module.css.
+ */
+.Page {
+  height: 100dvh;
+  padding: 2rem 2rem 1.5rem;
+  overflow: hidden;
+}
+
+.Frame {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-width: 60rem;
+  margin: 0 auto;
+}
+
+.FrameCenter {
+  justify-content: center;
+  text-align: center;
+}
+
+.Title {
+  flex: 0 0 auto;
+  margin-bottom: 1.25rem;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.Body {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  min-height: 0;
+}
+
+.Prose {
+  flex: 1 1 22rem;
+  max-width: 30rem;
+}
+
+.Visual {
+  flex: 1 1 22rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+.Actions {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1.25rem;
+}
+
+.FrameCenter .Actions {
+  justify-content: center;
+}
+

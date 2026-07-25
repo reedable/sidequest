@@ -1,0 +1,10 @@
+.Word {
+  display: flex;
+  justify-content: center;
+  gap: 0.65rem;
+  margin-bottom: 2rem;
+}
+
+.Title {
+  margin-bottom: 0.75rem !important;
+}

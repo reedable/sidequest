@@ -1,0 +1,48 @@
+.Split {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  width: 100%;
+}
+
+.Prose {
+  flex: 1 1 20rem;
+  max-width: 30rem;
+}
+
+/* 17.5rem matches the wheel's column on the rotation step, so the prose
+ * starts at the same place on every figure-led step. */
+.Board {
+  display: flex;
+  flex: 0 0 17.5rem;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.Column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Arrow {
+  height: 1.25rem;
+  line-height: 1.25rem;
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.ArrowOn {
+  opacity: 1;
+}
+
+.Slot {
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.SlotOn {
+  opacity: 1;
+}
