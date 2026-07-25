@@ -28,6 +28,7 @@ export default function WorldSplitFlow() {
   const [step, setStep] = useState<Step>("title");
   const [character, setCharacter] = useState<Character | null>(null);
   const [stats, setStats] = useState<SimulationStats | null>(null);
+  const [completedDraws, setCompletedDraws] = useState(0);
 
   function goTo(next: Step) {
     setStep(next);
@@ -78,8 +79,21 @@ export default function WorldSplitFlow() {
       {step === "simulation" && character && (
         <SimulationStep
           character={character}
+          initialRoundNumber={completedDraws + 1}
           onNext={(s) => {
-            setStats(s);
+            setCompletedDraws((d) => d + s.rounds);
+            setStats((prev) =>
+              prev
+                ? {
+                    rounds: prev.rounds + s.rounds,
+                    sky: {
+                      hades: prev.sky.hades + s.sky.hades,
+                      poseidon: prev.sky.poseidon + s.sky.poseidon,
+                      zeus: prev.sky.zeus + s.sky.zeus,
+                    },
+                  }
+                : s,
+            );
             goTo("results");
           }}
           onBack={() => goTo("character")}
@@ -89,7 +103,10 @@ export default function WorldSplitFlow() {
       {step === "results" && (
         <ResultsStep
           character={character}
-          onBack={() => goTo("character")}
+          onBack={(currentStats) => {
+            setStats(currentStats);
+            goTo("simulation");
+          }}
           onNext={() => goTo("explanation")}
           stats={stats}
         />

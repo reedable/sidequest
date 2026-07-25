@@ -18,7 +18,7 @@ const characterImages: Record<Character, string> = {
 
 interface Props {
   character: Character | null;
-  onBack: () => void;
+  onBack: (currentStats: SimulationStats) => void;
   onNext: () => void;
   stats: SimulationStats | null;
 }
@@ -104,44 +104,43 @@ export default function ResultsStep({
             No matter the order, every brother had the same chance.
           </Typography>
 
-            {(["hades", "poseidon", "zeus"] as Character[]).map((charId) => {
-              const skyCount = displayStats.sky[charId];
-              const pct =
-                displayStats.rounds > 0
-                  ? Math.round((skyCount / displayStats.rounds) * 100)
-                  : 0;
-              const charInfo = characters.find((ch) => ch.id === charId)!;
-              const isPlayer = charId === character;
+          {(["hades", "poseidon", "zeus"] as Character[]).map((charId) => {
+            const skyCount = displayStats.sky[charId];
+            const pct =
+              displayStats.rounds > 0
+                ? Math.round((skyCount / displayStats.rounds) * 100)
+                : 0;
+            const charInfo = characters.find((ch) => ch.id === charId)!;
+            const isPlayer = charId === character;
 
-              return (
-                <div key={charId} className={css.StatRow}>
-                  <div className={css.StatLabel}>
-                    <div className={css.StatName}>
-                      <img
-                        src={characterImages[charId]}
-                        alt=""
-                        className={css.Avatar}
-                      />
-                      <Typography component="span" variant="h6">
-                        {charInfo.name}
-                        {isPlayer ? " (you)" : ""}
-                      </Typography>
-                    </div>
+            return (
+              <div key={charId} className={css.StatRow}>
+                <div className={css.StatLabel}>
+                  <div className={css.StatName}>
+                    <img
+                      src={characterImages[charId]}
+                      alt=""
+                      className={css.Avatar}
+                    />
                     <Typography component="span" variant="h6">
-                      {displayStats.rounds === 0
-                        ? "-"
-                        : `${skyCount} / ${displayStats.rounds} (${pct}%)`}
+                      {charInfo.name}
+                      {isPlayer ? " (you)" : ""}
                     </Typography>
                   </div>
-                  <LinearProgress
-                    variant="determinate"
-                    value={pct}
-                    sx={{ height: 14, borderRadius: 1 }}
-                  />
+                  <Typography component="span" variant="h6">
+                    {displayStats.rounds === 0
+                      ? "-"
+                      : `${skyCount} / ${displayStats.rounds} (${pct}%)`}
+                  </Typography>
                 </div>
-              );
-            })}
-
+                <LinearProgress
+                  variant="determinate"
+                  value={pct}
+                  sx={{ height: 14, borderRadius: 1 }}
+                />
+              </div>
+            );
+          })}
         </div>
       }
       actions={

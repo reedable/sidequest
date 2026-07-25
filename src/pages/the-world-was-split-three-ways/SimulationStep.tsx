@@ -19,6 +19,7 @@ const characterImages: Record<Character, string> = {
 
 interface Props {
   character: Character;
+  initialRoundNumber?: number;
   onNext: (stats: SimulationStats) => void;
   onBack: () => void;
 }
@@ -79,9 +80,9 @@ function makeRound(character: Character): RoundState {
   };
 }
 
-export default function SimulationStep({ character, onNext, onBack }: Props) {
+export default function SimulationStep({ character, initialRoundNumber = 1, onNext, onBack }: Props) {
   const [round, setRound] = useState<RoundState>(() => makeRound(character));
-  const [roundNumber, setRoundNumber] = useState(1);
+  const [roundNumber, setRoundNumber] = useState(initialRoundNumber);
   const [stats, setStats] = useState<SimulationStats>({
     rounds: 0,
     sky: { hades: 0, poseidon: 0, zeus: 0 },
