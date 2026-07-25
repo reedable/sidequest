@@ -1,9 +1,12 @@
-import { Button, Container, LinearProgress, Typography } from "@mui/material";
+import { Button, LinearProgress, Typography } from "@mui/material";
+import ArrowForward from "@mui/icons-material/ArrowForward";
+import ArrowBack from "@mui/icons-material/ArrowBack";
 import { useEffect, useRef, useState } from "react";
+import Page from "../../components/Page";
+import css from "./ResultsStep.module.css";
 import hadesImg from "./images/hades.svg";
 import poseidonImg from "./images/poseidon.svg";
 import zeusImg from "./images/zeus.svg";
-import styles from "./ResultsStep.module.css";
 import type { Character, SimulationStats, StrawLength } from "./types";
 import { characters } from "./types";
 
@@ -91,91 +94,94 @@ export default function ResultsStep({
   }
 
   return (
-    <Container maxWidth="sm">
-      <h1>The draw was fair</h1>
-
-      <p>No matter the order, every brother had the same chance.</p>
-
-      <div className={styles.card}>
-        <div className={styles.cardHeader}>
-          <Typography component="h2" variant="h6">
-            Who drew the sky?
+    <Page
+      title="The draw was fair"
+      visual={
+        /* One column: the sentence sits with the bars rather than beside them,
+         * and the round controls sit with the bars they change. */
+        <div className={css.Stats}>
+          <Typography variant="h6" component="p" className={css.Heading}>
+            No matter the order, every brother had the same chance.
           </Typography>
-          <Typography component="span" variant="body2" color="text.secondary">
-            {displayStats.rounds} round{displayStats.rounds !== 1 ? "s" : ""}
-          </Typography>
-        </div>
 
-        {(["hades", "poseidon", "zeus"] as Character[]).map((charId) => {
-          const skyCount = displayStats.sky[charId];
-          const pct =
-            displayStats.rounds > 0
-              ? Math.round((skyCount / displayStats.rounds) * 100)
-              : 0;
-          const charInfo = characters.find((ch) => ch.id === charId)!;
-          const isPlayer = charId === character;
+            {(["hades", "poseidon", "zeus"] as Character[]).map((charId) => {
+              const skyCount = displayStats.sky[charId];
+              const pct =
+                displayStats.rounds > 0
+                  ? Math.round((skyCount / displayStats.rounds) * 100)
+                  : 0;
+              const charInfo = characters.find((ch) => ch.id === charId)!;
+              const isPlayer = charId === character;
 
-          return (
-            <div key={charId} className={styles.statRow}>
-              <div className={styles.statLabel}>
-                <div className={styles.statName}>
-                  <img
-                    src={characterImages[charId]}
-                    alt={charInfo.name}
-                    className={styles.charAvatar}
+              return (
+                <div key={charId} className={css.StatRow}>
+                  <div className={css.StatLabel}>
+                    <div className={css.StatName}>
+                      <img
+                        src={characterImages[charId]}
+                        alt=""
+                        className={css.Avatar}
+                      />
+                      <Typography component="span" variant="h6">
+                        {charInfo.name}
+                        {isPlayer ? " (you)" : ""}
+                      </Typography>
+                    </div>
+                    <Typography component="span" variant="h6">
+                      {displayStats.rounds === 0
+                        ? "-"
+                        : `${skyCount} / ${displayStats.rounds} (${pct}%)`}
+                    </Typography>
+                  </div>
+                  <LinearProgress
+                    variant="determinate"
+                    value={pct}
+                    sx={{ height: 14, borderRadius: 1 }}
                   />
-                  <Typography component="span" variant="body2">
-                    {charInfo.name}
-                    {isPlayer ? " (you)" : ""}
-                  </Typography>
                 </div>
-                <Typography component="span" variant="body2">
-                  {displayStats.rounds === 0
-                    ? "-"
-                    : `${skyCount} / ${displayStats.rounds} (${pct}%)`}
-                </Typography>
-              </div>
-              <LinearProgress variant="determinate" value={pct} />
-            </div>
-          );
-        })}
+              );
+            })}
 
-        <hr className={styles.divider} />
-
-        <h2>Run more rounds</h2>
-
-        <p>Watch the numbers close in on 33% each.</p>
-
-        <div className={styles.addRounds}>
-          <Button
-            variant="outlined"
-            size="small"
-            disabled={running}
-            onClick={() => addRounds(100, 100)}
-          >
-            Add 100 rounds
-          </Button>
-
-          <Button
-            variant="outlined"
-            size="small"
-            disabled={running}
-            onClick={() => addRounds(1000, 20)}
-          >
-            Add 1,000 rounds
-          </Button>
         </div>
-      </div>
+      }
+      actions={
+        <>
+          <Button variant="outlined" onClick={onBack} startIcon={<ArrowBack />}>
+            Play again
+          </Button>
 
-      <div className={styles.nav}>
-        <Button variant="outlined" onClick={onBack}>
-          Play again
-        </Button>
+          {/* The round controls live in the footer, beside the count they change. */}
+          <div className={css.AddRounds}>
+            <Button
+              variant="outlined"
+              disabled={running}
+              onClick={() => addRounds(100, 100)}
+            >
+              Add 100 rounds
+            </Button>
 
-        <Button variant="contained" onClick={onNext}>
-          Explain
-        </Button>
-      </div>
-    </Container>
+            <Button
+              variant="outlined"
+              disabled={running}
+              onClick={() => addRounds(1000, 20)}
+            >
+              Add 1,000 rounds
+            </Button>
+
+            <Typography variant="h6" component="p" color="text.secondary">
+              {displayStats.rounds} round{displayStats.rounds !== 1 ? "s" : ""}
+            </Typography>
+          </div>
+
+          <Button
+            variant="contained"
+            onClick={onNext}
+            endIcon={<ArrowForward />}
+          >
+            Explain
+          </Button>
+        </>
+      }
+    />
   );
 }

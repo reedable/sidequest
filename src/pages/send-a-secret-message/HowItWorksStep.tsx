@@ -2,7 +2,7 @@ import { Button, Typography } from "@mui/material";
 import ArrowForward from "@mui/icons-material/ArrowForward";
 import ArrowBack from "@mui/icons-material/ArrowBack";
 import LetterCell from "./LetterCell";
-import Page from "./Page";
+import Page from "../../components/Page";
 import css from "./HowItWorksStep.module.css";
 
 interface Props {

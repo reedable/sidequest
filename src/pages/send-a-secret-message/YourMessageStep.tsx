@@ -1,8 +1,8 @@
 import { Button, Slider, TextField, Typography } from "@mui/material";
-import ArrowForward from "@mui/icons-material/ArrowForward";
+import RestartAlt from "@mui/icons-material/RestartAlt";
 import ArrowBack from "@mui/icons-material/ArrowBack";
 import { useState } from "react";
-import Page from "./Page";
+import Page from "../../components/Page";
 import css from "./YourMessageStep.module.css";
 import { encrypt } from "./cipher";
 
@@ -62,8 +62,8 @@ export default function YourMessageStep({ onNext, onBack }: Props) {
           <Button variant="outlined" onClick={onBack} startIcon={<ArrowBack />}>
             Back
           </Button>
-          <Button variant="contained" onClick={onNext} endIcon={<ArrowForward />}>
-            Continue
+          <Button variant="contained" onClick={onNext} endIcon={<RestartAlt />}>
+            Done
           </Button>
         </>
       }

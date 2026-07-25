@@ -4,9 +4,9 @@ import ArrowBack from "@mui/icons-material/ArrowBack";
 import { useState } from "react";
 import type { ReactNode } from "react";
 import LetterCell from "./LetterCell";
-import Page from "./Page";
+import Page from "../../components/Page";
 import css from "./WalkthroughStep.module.css";
-import cx from "./cx";
+import cx from "../../components/cx";
 import { letterToNumber, numberToLetter, shiftedNumber } from "./cipher";
 
 interface Props {

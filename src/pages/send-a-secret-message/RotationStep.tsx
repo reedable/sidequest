@@ -3,9 +3,9 @@ import ArrowForward from "@mui/icons-material/ArrowForward";
 import ArrowBack from "@mui/icons-material/ArrowBack";
 import { useState } from "react";
 import type { ReactNode } from "react";
-import Page from "./Page";
+import Page from "../../components/Page";
 import css from "./RotationStep.module.css";
-import cx from "./cx";
+import cx from "../../components/cx";
 import { ALPHABET_SIZE, numberToLetter } from "./cipher";
 
 interface Props {

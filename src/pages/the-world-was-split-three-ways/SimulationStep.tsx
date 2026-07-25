@@ -1,5 +1,9 @@
-import { Button, Container, Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
+import ArrowForward from "@mui/icons-material/ArrowForward";
+import ArrowBack from "@mui/icons-material/ArrowBack";
 import { useEffect, useState } from "react";
+import Page from "../../components/Page";
+import cx from "../../components/cx";
 import hadesImg from "./images/hades.svg";
 import poseidonImg from "./images/poseidon.svg";
 import zeusImg from "./images/zeus.svg";
@@ -40,10 +44,6 @@ const STRAW_LABELS: Record<StrawLength, string> = {
   medium: "Sea",
   long: "Sky",
 };
-
-function cx(...classes: (string | false | undefined | null)[]): string {
-  return classes.filter(Boolean).join(" ");
-}
 
 function shuffle<T>(arr: T[]): T[] {
   const a = [...arr];
@@ -260,134 +260,143 @@ export default function SimulationStep({ character, onNext, onBack }: Props) {
   const npcChar = npcForPhase(round.phase);
 
   return (
-    <Container className={styles.SimulationStep} maxWidth="sm">
-      <h1>Round {roundNumber}</h1>
+    <Page
+      title={`Round ${roundNumber}`}
+      visual={
+        <div className={styles.Board}>
+          <div className={styles.straws}>
+            {([0, 1, 2] as const).map((i) => {
+              const isRevealedByHades =
+                round.revealed.hades && round.drawn.hades === i;
+              const isRevealedByPoseidon =
+                round.revealed.poseidon && round.drawn.poseidon === i;
+              const isRevealedByZeus =
+                round.revealed.zeus && round.drawn.zeus === i;
+              const isRevealed =
+                isRevealedByHades || isRevealedByPoseidon || isRevealedByZeus;
 
-      <div className={styles.card}>
-        <Typography
-          component="p"
-          role="status"
-          color={instruction.color}
-          className={styles.instruction}
-        >
-          {instruction.text}
-        </Typography>
-
-        <div className={styles.straws}>
-          {([0, 1, 2] as const).map((i) => {
-            const isRevealedByHades =
-              round.revealed.hades && round.drawn.hades === i;
-            const isRevealedByPoseidon =
-              round.revealed.poseidon && round.drawn.poseidon === i;
-            const isRevealedByZeus =
-              round.revealed.zeus && round.drawn.zeus === i;
-            const isRevealed =
-              isRevealedByHades || isRevealedByPoseidon || isRevealedByZeus;
-
-            const drawnById = isRevealedByHades
-              ? "hades"
-              : isRevealedByPoseidon
-                ? "poseidon"
-                : isRevealedByZeus
-                  ? "zeus"
-                  : null;
-            const drawnByChar = drawnById
-              ? characters.find((ch) => ch.id === drawnById)!
-              : null;
-
-            const length = round.positions[i];
-            const isClickable = isPlayerTurn && !isRevealed;
-            const isConsidering =
-              !isRevealed && npcChar !== null && consideringStraw === i;
-            const isPlayerStraw = isRevealed && drawnByChar?.id === character;
-            const labelChar = isRevealed
-              ? drawnByChar
-              : isConsidering
-                ? characters.find((c) => c.id === npcChar)!
+              const drawnById = isRevealedByHades
+                ? "hades"
+                : isRevealedByPoseidon
+                  ? "poseidon"
+                  : isRevealedByZeus
+                    ? "zeus"
+                    : null;
+              const drawnByChar = drawnById
+                ? characters.find((ch) => ch.id === drawnById)!
                 : null;
 
-            return (
-              <div key={i} className={styles.strawSlot}>
-                <div className={styles.strawColumn}>
-                  <Typography
-                    variant="caption"
-                    className={cx(
-                      styles.strawLabel,
-                      isRevealed && styles.strawLabelVisible,
-                      isRevealed &&
-                        length === "short" &&
-                        styles.strawLabelShort,
-                      isRevealed &&
-                        length === "medium" &&
-                        styles.strawLabelMedium,
-                      isRevealed && length === "long" && styles.strawLabelLong,
-                    )}
-                  >
-                    {STRAW_LABELS[length]}
-                  </Typography>
+              const length = round.positions[i];
+              const isClickable = isPlayerTurn && !isRevealed;
+              const isConsidering =
+                !isRevealed && npcChar !== null && consideringStraw === i;
+              const isPlayerStraw = isRevealed && drawnByChar?.id === character;
+              const labelChar = isRevealed
+                ? drawnByChar
+                : isConsidering
+                  ? characters.find((c) => c.id === npcChar)!
+                  : null;
 
-                  <div
-                    className={cx(
-                      styles.straw,
-                      isClickable && styles.clickable,
-                      isRevealed && isPlayerStraw && styles.player,
-                      isRevealed && !isPlayerStraw && styles.other,
-                      !isRevealed && isConsidering && styles.considering,
-                      isRevealed && length === "short" && styles.strawShort,
-                      isRevealed && length === "medium" && styles.strawMedium,
-                    )}
-                    onClick={
-                      isClickable ? () => handlePlayerDraw(i) : undefined
-                    }
-                  >
-                    {!isRevealed && <span className={styles.strawMark}>?</span>}
+              return (
+                <div key={i} className={styles.strawSlot}>
+                  <div className={styles.strawColumn}>
+                    <Typography
+                      variant="caption"
+                      className={cx(
+                        styles.strawLabel,
+                        isRevealed && styles.strawLabelVisible,
+                        isRevealed &&
+                          length === "short" &&
+                          styles.strawLabelShort,
+                        isRevealed &&
+                          length === "medium" &&
+                          styles.strawLabelMedium,
+                        isRevealed &&
+                          length === "long" &&
+                          styles.strawLabelLong,
+                      )}
+                    >
+                      {STRAW_LABELS[length]}
+                    </Typography>
+
+                    <div
+                      className={cx(
+                        styles.straw,
+                        isClickable && styles.clickable,
+                        isRevealed && isPlayerStraw && styles.player,
+                        isRevealed && !isPlayerStraw && styles.other,
+                        !isRevealed && isConsidering && styles.considering,
+                        isRevealed && length === "short" && styles.strawShort,
+                        isRevealed && length === "medium" && styles.strawMedium,
+                      )}
+                      onClick={
+                        isClickable ? () => handlePlayerDraw(i) : undefined
+                      }
+                    >
+                      {!isRevealed && <span className={styles.strawMark}>?</span>}
+                    </div>
+                  </div>
+
+                  <div className={styles.strawInfo}>
+                    <div
+                      className={cx(
+                        styles.avatar,
+                        labelChar && styles.avatarVisible,
+                        isConsidering && styles.avatarConsidering,
+                      )}
+                    >
+                      {labelChar && (
+                        <img
+                          src={characterImages[labelChar.id]}
+                          alt={labelChar.name}
+                          className={styles.avatarImg}
+                        />
+                      )}
+                    </div>
+                    <Typography
+                      variant="caption"
+                      className={cx(
+                        styles.strawCaption,
+                        isClickable && styles.strawCaptionClickable,
+                      )}
+                      color={
+                        isPlayerStraw
+                          ? "primary.main"
+                          : isRevealed && drawnByChar
+                            ? "secondary.main"
+                            : "text.disabled"
+                      }
+                      onClick={
+                        isClickable ? () => handlePlayerDraw(i) : undefined
+                      }
+                    >
+                      {isRevealed && drawnByChar
+                        ? `${drawnByChar.name}${drawnByChar.id === character ? " (You)" : ""}`
+                        : `straw ${i + 1}`}
+                    </Typography>
                   </div>
                 </div>
+              );
+            })}
+          </div>
 
-                <div className={styles.strawInfo}>
-                  <div
-                    className={cx(
-                      styles.avatar,
-                      labelChar && styles.avatarVisible,
-                      isConsidering && styles.avatarConsidering,
-                    )}
-                  >
-                    {labelChar && (
-                      <img
-                        src={characterImages[labelChar.id]}
-                        alt={labelChar.name}
-                        className={styles.avatarImg}
-                      />
-                    )}
-                  </div>
-                  <Typography
-                    variant="caption"
-                    className={cx(
-                      styles.strawCaption,
-                      isClickable && styles.strawCaptionClickable,
-                    )}
-                    color={
-                      isPlayerStraw
-                        ? "primary.main"
-                        : isRevealed && drawnByChar
-                          ? "secondary.main"
-                          : "text.disabled"
-                    }
-                    onClick={
-                      isClickable ? () => handlePlayerDraw(i) : undefined
-                    }
-                  >
-                    {isRevealed && drawnByChar
-                      ? `${drawnByChar.name}${drawnByChar.id === character ? " (You)" : ""}`
-                      : `straw ${i + 1}`}
-                  </Typography>
-                </div>
-              </div>
-            );
-          })}
+          <Typography
+            variant="h6"
+            component="p"
+            role="status"
+            color={instruction.color}
+            className={styles.instruction}
+          >
+            {instruction.text}
+          </Typography>
         </div>
+      }
+      actions={
+        <>
+          <Button variant="outlined" onClick={onBack} startIcon={<ArrowBack />}>
+            Back
+          </Button>
 
-        <div className={styles.drawAgain}>
           <Button
             variant="outlined"
             onClick={handleDrawAgain}
@@ -395,18 +404,16 @@ export default function SimulationStep({ character, onNext, onBack }: Props) {
           >
             Draw Again
           </Button>
-        </div>
-      </div>
 
-      <div className={styles.nav}>
-        <Button variant="outlined" onClick={onBack}>
-          Back
-        </Button>
-
-        <Button variant="contained" onClick={() => onNext(stats)}>
-          See results
-        </Button>
-      </div>
-    </Container>
+          <Button
+            variant="contained"
+            onClick={() => onNext(stats)}
+            endIcon={<ArrowForward />}
+          >
+            See results
+          </Button>
+        </>
+      }
+    />
   );
 }

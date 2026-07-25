@@ -3,11 +3,14 @@ import {
   Card,
   CardActionArea,
   CardContent,
-  Container,
   Typography,
 } from "@mui/material";
+import ArrowForward from "@mui/icons-material/ArrowForward";
+import ArrowBack from "@mui/icons-material/ArrowBack";
 import { useState } from "react";
-import styles from "./CharacterStep.module.css";
+import Page from "../../components/Page";
+import cx from "../../components/cx";
+import css from "./CharacterStep.module.css";
 import hadesImg from "./images/hades.svg";
 import poseidonImg from "./images/poseidon.svg";
 import zeusImg from "./images/zeus.svg";
@@ -29,51 +32,53 @@ export default function CharacterStep({ onNext, onBack }: Props) {
   const [selected, setSelected] = useState<Character | null>(null);
 
   return (
-    <Container maxWidth="sm">
-      <h1>Choose your character</h1>
-
-      <div className={styles.cards}>
-        {characters.map((c) => (
-          <Card
-            key={c.id}
-            elevation={selected === c.id ? 8 : 2}
-            className={`${styles.card}${selected === c.id ? ` ${styles.cardSelected}` : ""}`}
-          >
-            <CardActionArea
-              onClick={() => setSelected(c.id)}
-              className={styles.cardActionArea}
+    <Page
+      title="Choose your character"
+      visual={
+        <div className={css.cards}>
+          {characters.map((c) => (
+            <Card
+              key={c.id}
+              elevation={selected === c.id ? 8 : 2}
+              className={cx(css.card, selected === c.id && css.cardSelected)}
             >
-              <CardContent className={styles.cardInner}>
-                <img
-                  src={characterImages[c.id]}
-                  alt={c.name}
-                  className={styles.avatar}
-                />
-                <Typography component="h2" variant="h5" gutterBottom>
-                  {c.name}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {c.drawPosition}
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-          </Card>
-        ))}
-      </div>
-
-      <div className={styles.actions}>
-        <Button variant="outlined" onClick={onBack}>
-          Back
-        </Button>
-
-        <Button
-          variant="contained"
-          disabled={selected === null}
-          onClick={() => selected && onNext(selected)}
-        >
-          Continue
-        </Button>
-      </div>
-    </Container>
+              <CardActionArea
+                onClick={() => setSelected(c.id)}
+                className={css.cardActionArea}
+              >
+                <CardContent className={css.cardInner}>
+                  <img
+                    src={characterImages[c.id]}
+                    alt={c.name}
+                    className={css.avatar}
+                  />
+                  <Typography component="h2" variant="h5" gutterBottom>
+                    {c.name}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {c.drawPosition}
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          ))}
+        </div>
+      }
+      actions={
+        <>
+          <Button variant="outlined" onClick={onBack} startIcon={<ArrowBack />}>
+            Back
+          </Button>
+          <Button
+            variant="contained"
+            disabled={selected === null}
+            onClick={() => selected && onNext(selected)}
+            endIcon={<ArrowForward />}
+          >
+            Continue
+          </Button>
+        </>
+      }
+    />
   );
 }

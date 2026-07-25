@@ -1,17 +1,28 @@
-.ExplanationStep {
-  margin: 2rem;
+.Split {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  width: 100%;
+}
 
-  figure {
-    font-family: "Latin Modern Math", Georgia, serif;
-    font-size: 24px;
-    margin: 0 0 1rem;
-    text-align: center;
-  }
+.Prose {
+  flex: 1 1 20rem;
+  max-width: 30rem;
+}
 
-  .Actions {
-    display: flex;
-    justify-content: space-between;
-    gap: 16px;
-    margin-top: 24px;
-  }
+/* 17.5rem matches the figure column on the cipher lesson's steps. */
+.Figures {
+  display: flex;
+  flex: 0 0 17.5rem;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* The face comes from Math.module.css; this is the display-size tweak. */
+.Figure {
+  margin: 0;
+  font-size: 1.75rem;
+  text-align: center;
 }

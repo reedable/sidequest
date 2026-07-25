@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import css from "./LetterCell.module.css";
-import cx from "./cx";
+import cx from "../../components/cx";
 
 /**
  * The one letter/number tile used across the lesson. The fill is the only

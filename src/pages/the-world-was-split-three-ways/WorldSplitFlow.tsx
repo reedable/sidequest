@@ -8,6 +8,7 @@ import CharacterStep from "./CharacterStep";
 import SimulationStep from "./SimulationStep";
 import ResultsStep from "./ResultsStep";
 import ExplanationStep from "./ExplanationStep";
+import LargeNumbersStep from "./LargeNumbersStep";
 import type { Character, SimulationStats } from "./types";
 
 type Step =
@@ -20,6 +21,7 @@ type Step =
   | "simulation"
   | "results"
   | "explanation"
+  | "large-numbers"
   | "info";
 
 export default function WorldSplitFlow() {
@@ -96,6 +98,13 @@ export default function WorldSplitFlow() {
       {step === "explanation" && (
         <ExplanationStep
           onBack={() => goTo("results")}
+          onNext={() => goTo("large-numbers")}
+        />
+      )}
+
+      {step === "large-numbers" && (
+        <LargeNumbersStep
+          onBack={() => goTo("explanation")}
           onDone={() => goTo("title")}
         />
       )}

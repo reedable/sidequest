@@ -1,9 +1,9 @@
-import ArrowBack from "@mui/icons-material/ArrowBack";
-import ArrowForward from "@mui/icons-material/ArrowForward";
 import { Button, Typography } from "@mui/material";
-import math from "./Math.module.css";
+import ArrowForward from "@mui/icons-material/ArrowForward";
+import ArrowBack from "@mui/icons-material/ArrowBack";
+import Page from "../../components/Page";
 import css from "./ModuloStep.module.css";
-import Page from "./Page";
+import math from "../../components/Math.module.css";
 
 interface Props {
   onNext: () => void;
@@ -46,15 +46,15 @@ export default function ModuloStep({ onNext, onBack }: Props) {
             </Typography>
 
             <Typography variant="h6" component="p" gutterBottom>
-              You do it with clocks. It's 11, you wait 5 hours, it's 4 o'clock.
-              Nobody says 16 o'clock.
+              You do it with clocks. It's 11, you wait 5 hours, it's 4. Nobody
+              says 16 o'clock.
             </Typography>
 
             <Typography variant="h6" component="p" gutterBottom>
               The alphabet has 26 letters, so we work <em>modulo 26</em>. 3
-              positions after <strong>Z</strong> is{" "}
-              <span className={math.Math}>29 mod 26 = 3</span>. and{" "}
-              <strong>3</strong> is <strong>C</strong>.
+              positions after Z: <span className={math.Math}>29 mod 26</span> is{" "}
+              <span className={math.Math}>3</span>, and <strong>3</strong> is{" "}
+              <strong>C</strong>.
             </Typography>
           </div>
         </div>
@@ -69,7 +69,7 @@ export default function ModuloStep({ onNext, onBack }: Props) {
             onClick={onNext}
             endIcon={<ArrowForward />}
           >
-            One wrinkle
+            Let me write one
           </Button>
         </>
       }

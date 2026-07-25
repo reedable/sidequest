@@ -1,180 +1,164 @@
-.SimulationStep {
-  .card {
-    background: #fff;
-    border-radius: 4px;
-    box-shadow:
-      0 2px 4px rgba(0, 0, 0, 0.1),
-      0 4px 8px rgba(0, 0, 0, 0.06);
-    padding: 24px;
-    margin-bottom: 24px;
-  }
+/* One column: the instruction sits under the straws, near the footer controls. */
+.Board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
 
-  @media (min-width: 900px) {
-    .card {
-      padding: 40px;
-    }
-  }
+.instruction {
+  margin-top: 2rem;
+  text-align: center;
+}
 
-  .instruction {
-    margin-bottom: 32px;
-  }
+.straws {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  align-items: flex-start;
+}
 
+@media (min-width: 600px) {
   .straws {
-    display: flex;
-    justify-content: center;
-    gap: 24px;
-    margin-bottom: 32px;
-    align-items: flex-start;
+    gap: 40px;
   }
+}
 
-  @media (min-width: 600px) {
-    .straws {
-      gap: 40px;
-    }
-  }
+.strawSlot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 72px;
+}
 
-  .strawSlot {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    width: 72px;
-  }
+.strawColumn {
+  position: relative;
+  height: 164px;
+  display: flex;
+  align-items: flex-end;
+}
 
-  .strawColumn {
-    position: relative;
-    height: 164px;
-    display: flex;
-    align-items: flex-end;
-  }
+.strawLabel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  visibility: hidden;
+}
 
-  .strawLabel {
-    position: absolute;
-    left: 0;
-    right: 0;
-    text-align: center;
-    visibility: hidden;
-  }
+.strawLabelVisible {
+  visibility: visible;
+}
 
-  .strawLabelVisible {
-    visibility: visible;
-  }
+.strawLabelShort {
+  bottom: 60px;
+}
 
-  .strawLabelShort {
-    bottom: 60px;
-  }
+.strawLabelMedium {
+  bottom: 100px;
+}
 
-  .strawLabelMedium {
-    bottom: 100px;
-  }
+.strawLabelLong {
+  bottom: 144px;
+}
 
-  .strawLabelLong {
-    bottom: 144px;
-  }
+/*
+ * Fill and height both carry information here: the fill says who drew the
+ * straw, the height says how long it turned out to be.
+ */
+.straw {
+  width: 36px;
+  height: 140px;
+  background-color: #616161;
+  border-radius: 4px;
+  cursor: default;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    height 0.3s ease-out,
+    background-color 0.2s;
+}
 
+@media (prefers-reduced-motion: reduce) {
   .straw {
-    width: 36px;
-    height: 140px;
-    background-color: #616161;
-    border-radius: 4px;
-    cursor: default;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition:
-      height 0.3s ease-out,
-      background-color 0.2s;
+    transition: none;
   }
+}
 
-  @media (prefers-reduced-motion: reduce) {
-    .straw {
-      transition: none;
-    }
-  }
+.straw.clickable {
+  cursor: pointer;
+}
 
-  .straw.clickable {
-    cursor: pointer;
+@media (prefers-reduced-motion: no-preference) {
+  .straw.clickable:hover {
+    background-color: #424242;
+    animation: jiggle 0.4s ease;
   }
+}
 
-  @media (prefers-reduced-motion: no-preference) {
-    .straw.clickable:hover {
-      background-color: #424242;
-      animation: jiggle 0.4s ease;
-    }
-  }
+.straw.considering {
+  background-color: #9e9e9e;
+}
 
-  .straw.considering {
-    background-color: #9e9e9e;
-  }
+.straw.player {
+  background-color: #212121;
+}
 
-  .straw.player {
-    background-color: #212121;
-  }
+.straw.other {
+  background-color: #757575;
+}
 
-  .straw.other {
-    background-color: #757575;
-  }
+.strawShort {
+  height: 56px;
+}
 
-  .strawShort {
-    height: 56px;
-  }
+.strawMedium {
+  height: 96px;
+}
 
-  .strawMedium {
-    height: 96px;
-  }
+.strawMark {
+  color: #fff;
+}
 
-  .strawMark {
-    color: #fff;
-  }
+.strawInfo {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
 
-  .strawInfo {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-  }
+.avatar {
+  width: 52px;
+  height: 52px;
+  visibility: hidden;
+}
 
-  .avatar {
-    width: 52px;
-    height: 52px;
-    visibility: hidden;
-  }
+.avatarVisible {
+  visibility: visible;
+}
 
-  .avatarVisible {
-    visibility: visible;
-  }
+.avatarConsidering {
+  opacity: 0.5;
+}
 
-  .avatarConsidering {
-    opacity: 0.5;
-  }
+.avatarImg {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
 
-  .avatarImg {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-  }
+.strawCaption {
+  display: block;
+  height: 32px;
+  line-height: 1.4;
+}
 
-  .strawCaption {
-    display: block;
-    height: 32px;
-    line-height: 1.4;
-  }
-
-  .strawCaptionClickable {
-    cursor: pointer;
-  }
-
-  .drawAgain {
-    text-align: center;
-  }
-
-  .nav {
-    display: flex;
-    justify-content: space-between;
-    gap: 16px;
-  }
+.strawCaptionClickable {
+  cursor: pointer;
 }
 
 @keyframes jiggle {

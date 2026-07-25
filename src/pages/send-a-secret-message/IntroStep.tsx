@@ -1,7 +1,7 @@
 import { Button, Typography } from "@mui/material";
 import ArrowForward from "@mui/icons-material/ArrowForward";
 import ArrowBack from "@mui/icons-material/ArrowBack";
-import Page from "./Page";
+import Page from "../../components/Page";
 
 interface Props {
   onNext: () => void;
@@ -17,7 +17,11 @@ export default function IntroStep({ onNext, onBack }: Props) {
           <Button variant="outlined" onClick={onBack} startIcon={<ArrowBack />}>
             Back
           </Button>
-          <Button variant="contained" onClick={onNext} endIcon={<ArrowForward />}>
+          <Button
+            variant="contained"
+            onClick={onNext}
+            endIcon={<ArrowForward />}
+          >
             Show me the trick
           </Button>
         </>

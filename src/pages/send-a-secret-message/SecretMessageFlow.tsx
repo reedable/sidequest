@@ -6,7 +6,6 @@ import WalkthroughStep from "./WalkthroughStep";
 import WrapAroundStep from "./WrapAroundStep";
 import RotationStep from "./RotationStep";
 import ModuloStep from "./ModuloStep";
-import FormulaStep from "./FormulaStep";
 import YourMessageStep from "./YourMessageStep";
 
 type Step =
@@ -17,7 +16,6 @@ type Step =
   | "wrap-around"
   | "rotation"
   | "modulo"
-  | "formula"
   | "your-message";
 
 export default function SecretMessageFlow() {
@@ -68,22 +66,15 @@ export default function SecretMessageFlow() {
 
       {step === "modulo" && (
         <ModuloStep
-          onNext={() => goTo("formula")}
-          onBack={() => goTo("rotation")}
-        />
-      )}
-
-      {step === "formula" && (
-        <FormulaStep
           onNext={() => goTo("your-message")}
-          onBack={() => goTo("modulo")}
+          onBack={() => goTo("rotation")}
         />
       )}
 
       {step === "your-message" && (
         <YourMessageStep
           onNext={() => goTo("title")}
-          onBack={() => goTo("formula")}
+          onBack={() => goTo("modulo")}
         />
       )}
     </>

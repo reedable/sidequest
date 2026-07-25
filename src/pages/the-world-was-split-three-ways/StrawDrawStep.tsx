@@ -1,5 +1,7 @@
-import { Button, Container } from "@mui/material";
-import css from "./StrawDrawStep.module.css";
+import { Button, Typography } from "@mui/material";
+import ArrowForward from "@mui/icons-material/ArrowForward";
+import ArrowBack from "@mui/icons-material/ArrowBack";
+import Page from "../../components/Page";
 
 interface Props {
   onNext: () => void;
@@ -8,36 +10,40 @@ interface Props {
 
 export default function StrawDrawStep({ onNext, onBack }: Props) {
   return (
-    <Container className={css.StrawDrawStep} maxWidth="sm">
-      <h1>Here's how it went</h1>
-
-      <p>
+    <Page
+      title="Here's how it went"
+      actions={
+        <>
+          <Button variant="outlined" onClick={onBack} startIcon={<ArrowBack />}>
+            Back
+          </Button>
+          <Button
+            variant="contained"
+            onClick={onNext}
+            endIcon={<ArrowForward />}
+          >
+            Wait a second…
+          </Button>
+        </>
+      }
+    >
+      <Typography variant="h6" component="p" gutterBottom>
         <strong>Hades</strong> drew first and pulled the{" "}
         <strong>shortest straw</strong>. He got the <strong>Underworld</strong>,
         the dark realm beneath the earth.
-      </p>
+      </Typography>
 
-      <p>
+      <Typography variant="h6" component="p" gutterBottom>
         <strong>Poseidon</strong> drew second and pulled the{" "}
         <strong>middle straw</strong>. He got the <strong>Sea</strong>, the vast
         and stormy oceans.
-      </p>
+      </Typography>
 
-      <p>
+      <Typography variant="h6" component="p" gutterBottom>
         <strong>Zeus</strong> drew last and got whatever was left, the{" "}
         <strong>longest straw</strong>. He got the <strong>Sky</strong> and
         became ruler of all the Olympian gods.
-      </p>
-
-      <div className={css.Actions}>
-        <Button variant="outlined" onClick={onBack}>
-          Back
-        </Button>
-
-        <Button variant="contained" onClick={onNext}>
-          Wait a second…
-        </Button>
-      </div>
-    </Container>
+      </Typography>
+    </Page>
   );
 }

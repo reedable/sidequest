@@ -2,7 +2,7 @@ import { Button, Typography } from "@mui/material";
 import ArrowForward from "@mui/icons-material/ArrowForward";
 import { useEffect, useState } from "react";
 import LetterCell from "./LetterCell";
-import Page from "./Page";
+import Page from "../../components/Page";
 import css from "./TitleStep.module.css";
 import { ALPHABET_SIZE, encryptLetter, numberToLetter } from "./cipher";
 
@@ -56,7 +56,12 @@ export default function TitleStep({ onNext }: Props) {
     <Page
       center
       actions={
-        <Button variant="contained" size="large" onClick={onNext} endIcon={<ArrowForward />}>
+        <Button
+          variant="contained"
+          size="large"
+          onClick={onNext}
+          endIcon={<ArrowForward />}
+        >
           Begin
         </Button>
       }
@@ -75,7 +80,12 @@ export default function TitleStep({ onNext }: Props) {
         Send a Secret Message
       </Typography>
 
-      <Typography variant="h6" component="p" gutterBottom color="text.secondary">
+      <Typography
+        variant="h6"
+        component="p"
+        gutterBottom
+        color="text.secondary"
+      >
         Write a note that only your friend can read.
       </Typography>
     </Page>

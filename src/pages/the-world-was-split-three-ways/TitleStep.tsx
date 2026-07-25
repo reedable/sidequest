@@ -1,5 +1,5 @@
-import { Button, Container } from "@mui/material";
-import css from "./TitleStep.module.css";
+import { Button, Typography } from "@mui/material";
+import Page from "../../components/Page";
 
 interface Props {
   onNext: () => void;
@@ -7,14 +7,17 @@ interface Props {
 
 export default function TitleStep({ onNext }: Props) {
   return (
-    <Container className={css.TitleStep} maxWidth="sm">
-      <h1>The World Was Split Three Ways</h1>
-
-      <div className={css.Actions}>
-        <Button variant="contained" onClick={onNext}>
+    <Page
+      center
+      actions={
+        <Button variant="contained" size="large" onClick={onNext}>
           Begin
         </Button>
-      </div>
-    </Container>
+      }
+    >
+      <Typography variant="h3" component="h1">
+        The World Was Split Three Ways
+      </Typography>
+    </Page>
   );
 }

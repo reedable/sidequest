@@ -6,15 +6,15 @@
  * face lives in Math.module.css.
  */
 .Page {
-  height: 100dvh;
+  min-height: 100dvh;
   padding: 2rem 2rem 1.5rem;
-  overflow: hidden;
+  overflow-y: auto;
 }
 
 .Frame {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  min-height: calc(100dvh - 3.5rem);
   max-width: 60rem;
   margin: 0 auto;
 }
@@ -55,15 +55,50 @@
   min-width: 0;
 }
 
+/*
+ * Three tracks so the middle slot is centred on the frame rather than on
+ * whatever the two end labels happen to measure. Steps with two buttons put
+ * them in the outer tracks and leave the middle empty; steps with one centre it.
+ */
 .Actions {
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
   flex: 0 0 auto;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
   gap: 1rem;
   padding-top: 1.25rem;
+  padding-bottom: 1.5rem;
+  margin-bottom: -1.5rem;
+  background: var(--mui-palette-background-default, #f5f5f5);
 }
 
-.FrameCenter .Actions {
-  justify-content: center;
+.Actions > *:first-child {
+  grid-column: 1;
+  justify-self: start;
+}
+
+.Actions > *:nth-child(2) {
+  grid-column: 2;
+  justify-self: center;
+}
+
+.Actions > *:last-child {
+  grid-column: 3;
+  justify-self: end;
+}
+
+/* Two children: the second is the end button, not the middle one. */
+.Actions > *:first-child:nth-last-child(2) ~ * {
+  grid-column: 3;
+  justify-self: end;
+}
+
+/* One child, as on the title screen. */
+.Actions > *:only-child {
+  grid-column: 2;
+  justify-self: center;
 }
 

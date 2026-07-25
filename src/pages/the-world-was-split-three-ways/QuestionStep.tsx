@@ -1,5 +1,7 @@
-import { Button, Container } from "@mui/material";
-import css from "./QuestionStep.module.css";
+import { Button, Typography } from "@mui/material";
+import ArrowForward from "@mui/icons-material/ArrowForward";
+import ArrowBack from "@mui/icons-material/ArrowBack";
+import Page from "../../components/Page";
 
 interface Props {
   onNext: () => void;
@@ -8,34 +10,41 @@ interface Props {
 
 export default function QuestionStep({ onNext, onBack }: Props) {
   return (
-    <Container className={css.QuestionStep} maxWidth="sm">
-      <h1>Wait a second...</h1>
+    <Page
+      title="Wait a second..."
+      actions={
+        <>
+          <Button variant="outlined" onClick={onBack} startIcon={<ArrowBack />}>
+            Back
+          </Button>
+          <Button
+            variant="contained"
+            onClick={onNext}
+            endIcon={<ArrowForward />}
+          >
+            Continue
+          </Button>
+        </>
+      }
+    >
+      <Typography variant="h6" component="p" gutterBottom>
+        Let's think about what just happened.
+      </Typography>
 
-      <p>Let's think about what just happened.</p>
-
-      <p>
+      <Typography variant="h6" component="p" gutterBottom>
         <strong>Hades</strong> drew first. He had <strong>three straws</strong>{" "}
         to choose from.
-      </p>
+      </Typography>
 
-      <p>
+      <Typography variant="h6" component="p" gutterBottom>
         <strong>Poseidon</strong> drew second. Only <strong>two straws</strong>{" "}
         were left.
-      </p>
+      </Typography>
 
-      <p>
+      <Typography variant="h6" component="p" gutterBottom>
         <strong>Zeus</strong> drew last. He didn't even get to choose. He just
         took <strong>whatever remained</strong>.
-      </p>
-
-      <div className={css.Actions}>
-        <Button variant="outlined" onClick={onBack}>
-          Back
-        </Button>
-        <Button variant="contained" onClick={onNext}>
-          Continue
-        </Button>
-      </div>
-    </Container>
+      </Typography>
+    </Page>
   );
 }
