@@ -11,7 +11,13 @@
   overflow-y: auto;
 }
 
+/*
+ * The frame is the query container for the footer. Its width stops tracking
+ * the viewport once the screen passes 60rem, so a media query can't tell
+ * whether the footer is actually cramped and a container query can.
+ */
 .Frame {
+  container-type: inline-size;
   display: flex;
   flex-direction: column;
   min-height: calc(100dvh - 3.5rem);
@@ -56,9 +62,9 @@
 }
 
 /*
- * Three tracks so the middle slot is centred on the frame rather than on
- * whatever the two end labels happen to measure. Steps with two buttons put
- * them in the outer tracks and leave the middle empty; steps with one centre it.
+ * Three named tracks. Each slot is placed by what it is rather than by how
+ * many siblings it has, so a step can add or drop the centre controls without
+ * changing what the other two mean.
  */
 .Actions {
   position: sticky;
@@ -75,30 +81,63 @@
   background: var(--mui-palette-background-default, #f5f5f5);
 }
 
-.Actions > *:first-child {
+.Back {
   grid-column: 1;
+  grid-row: 1;
   justify-self: start;
 }
 
-.Actions > *:nth-child(2) {
+.Controls {
   grid-column: 2;
+  grid-row: 1;
   justify-self: center;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
 }
 
-.Actions > *:last-child {
+.Next {
   grid-column: 3;
+  grid-row: 1;
   justify-self: end;
 }
 
-/* Two children: the second is the end button, not the middle one. */
-.Actions > *:first-child:nth-last-child(2) ~ * {
-  grid-column: 3;
-  justify-self: end;
+/* Title screens have a single button and centre it. */
+.FrameCenter .Actions {
+  grid-template-columns: auto;
 }
 
-/* One child, as on the title screen. */
-.Actions > *:only-child {
-  grid-column: 2;
+.FrameCenter .Next {
+  grid-column: 1;
   justify-self: center;
+}
+
+/*
+ * Not enough room for three across: the centre controls take their own row
+ * above the two navigation buttons, which stay at the ends.
+ */
+@container (max-width: 38rem) {
+  .Actions {
+    grid-template-columns: 1fr 1fr;
+    row-gap: 0.75rem;
+  }
+
+  .Controls {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    justify-self: stretch;
+  }
+
+  .Back {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .Next {
+    grid-column: 2;
+    grid-row: 2;
+  }
 }
 

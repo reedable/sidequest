@@ -57,15 +57,15 @@ export default function YourMessageStep({ onNext, onBack }: Props) {
           </div>
         </div>
       }
-      actions={
-        <>
-          <Button variant="outlined" onClick={onBack} startIcon={<ArrowBack />}>
-            Back
-          </Button>
-          <Button variant="contained" onClick={onNext} endIcon={<RestartAlt />}>
-            Done
-          </Button>
-        </>
+      back={
+        <Button variant="outlined" onClick={onBack} startIcon={<ArrowBack />}>
+          Back
+        </Button>
+      }
+      next={
+        <Button variant="contained" onClick={onNext} endIcon={<RestartAlt />}>
+          Done
+        </Button>
       }
     >
       <Typography variant="h6" component="p" gutterBottom>

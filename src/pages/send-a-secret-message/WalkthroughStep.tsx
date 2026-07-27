@@ -104,24 +104,24 @@ export default function WalkthroughStep({ onNext, onBack }: Props) {
           </div>
         </div>
       }
-      actions={
-        <>
-          <Button variant="outlined" onClick={onBack} startIcon={<ArrowBack />}>
-            Back
+      back={
+        <Button variant="outlined" onClick={onBack} startIcon={<ArrowBack />}>
+          Back
+        </Button>
+      }
+      next={
+        stage < 3 ? (
+          <Button
+            variant="contained"
+            onClick={() => setStage((s) => (s + 1) as Stage)}
+          >
+            {BUTTONS[stage]}
           </Button>
-          {stage < 3 ? (
-            <Button
-              variant="contained"
-              onClick={() => setStage((s) => (s + 1) as Stage)}
-            >
-              {BUTTONS[stage]}
-            </Button>
-          ) : (
-            <Button variant="contained" onClick={onNext} endIcon={<ArrowForward />}>
-              Try a harder word
-            </Button>
-          )}
-        </>
+        ) : (
+          <Button variant="contained" onClick={onNext} endIcon={<ArrowForward />}>
+            Try a harder word
+          </Button>
+        )
       }
     />
   );

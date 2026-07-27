@@ -100,21 +100,21 @@ export default function RotationStep({ onNext, onBack }: Props) {
           </div>
         </div>
       }
-      actions={
-        <>
-          <Button variant="outlined" onClick={onBack} startIcon={<ArrowBack />}>
-            Back
+      back={
+        <Button variant="outlined" onClick={onBack} startIcon={<ArrowBack />}>
+          Back
+        </Button>
+      }
+      next={
+        done ? (
+          <Button variant="contained" onClick={onNext} endIcon={<ArrowForward />}>
+            This has a name
           </Button>
-          {done ? (
-            <Button variant="contained" onClick={onNext} endIcon={<ArrowForward />}>
-              This has a name
-            </Button>
-          ) : (
-            <Button variant="contained" onClick={() => setSteps((s) => s + 1)}>
-              {steps === 0 ? "Take a step" : "Keep going"}
-            </Button>
-          )}
-        </>
+        ) : (
+          <Button variant="contained" onClick={() => setSteps((s) => s + 1)}>
+            {steps === 0 ? "Take a step" : "Keep going"}
+          </Button>
+        )
       }
     />
   );

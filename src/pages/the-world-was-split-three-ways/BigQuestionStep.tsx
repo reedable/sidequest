@@ -12,19 +12,19 @@ export default function BigQuestionStep({ onNext, onBack }: Props) {
   return (
     <Page
       title="Who had the best chance of drawing the longest straw?"
-      actions={
-        <>
-          <Button variant="outlined" onClick={onBack} startIcon={<ArrowBack />}>
-            Back
-          </Button>
-          <Button
-            variant="contained"
-            onClick={onNext}
-            endIcon={<ArrowForward />}
-          >
-            Pick your character
-          </Button>
-        </>
+      back={
+        <Button variant="outlined" onClick={onBack} startIcon={<ArrowBack />}>
+          Back
+        </Button>
+      }
+      next={
+        <Button
+          variant="contained"
+          onClick={onNext}
+          endIcon={<ArrowForward />}
+        >
+          Pick your character
+        </Button>
       }
     >
       <Typography variant="h6" component="p" gutterBottom>

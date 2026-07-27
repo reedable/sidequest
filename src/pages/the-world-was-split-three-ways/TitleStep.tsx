@@ -9,7 +9,7 @@ export default function TitleStep({ onNext }: Props) {
   return (
     <Page
       center
-      actions={
+      next={
         <Button variant="contained" size="large" onClick={onNext}>
           Begin
         </Button>

@@ -12,19 +12,19 @@ export default function IntroStep({ onNext, onBack }: Props) {
   return (
     <Page
       title="Wouldn't it be cool..."
-      actions={
-        <>
-          <Button variant="outlined" onClick={onBack} startIcon={<ArrowBack />}>
-            Back
-          </Button>
-          <Button
-            variant="contained"
-            onClick={onNext}
-            endIcon={<ArrowForward />}
-          >
-            Show me the trick
-          </Button>
-        </>
+      back={
+        <Button variant="outlined" onClick={onBack} startIcon={<ArrowBack />}>
+          Back
+        </Button>
+      }
+      next={
+        <Button
+          variant="contained"
+          onClick={onNext}
+          endIcon={<ArrowForward />}
+        >
+          Show me the trick
+        </Button>
       }
     >
       <Typography variant="h6" component="p" gutterBottom>

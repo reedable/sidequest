@@ -42,15 +42,15 @@ export default function LargeNumbersStep({ onBack, onDone }: Props) {
           </div>
         </div>
       }
-      actions={
-        <>
-          <Button variant="outlined" onClick={onBack} startIcon={<ArrowBack />}>
-            Back
-          </Button>
-          <Button variant="contained" onClick={onDone} endIcon={<RestartAlt />}>
-            Done
-          </Button>
-        </>
+      back={
+        <Button variant="outlined" onClick={onBack} startIcon={<ArrowBack />}>
+          Back
+        </Button>
+      }
+      next={
+        <Button variant="contained" onClick={onDone} endIcon={<RestartAlt />}>
+          Done
+        </Button>
       }
     />
   );

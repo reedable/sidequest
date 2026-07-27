@@ -64,20 +64,20 @@ export default function CharacterStep({ onNext, onBack }: Props) {
           ))}
         </div>
       }
-      actions={
-        <>
-          <Button variant="outlined" onClick={onBack} startIcon={<ArrowBack />}>
-            Back
-          </Button>
-          <Button
-            variant="contained"
-            disabled={selected === null}
-            onClick={() => selected && onNext(selected)}
-            endIcon={<ArrowForward />}
-          >
-            Continue
-          </Button>
-        </>
+      back={
+        <Button variant="outlined" onClick={onBack} startIcon={<ArrowBack />}>
+          Back
+        </Button>
+      }
+      next={
+        <Button
+          variant="contained"
+          disabled={selected === null}
+          onClick={() => selected && onNext(selected)}
+          endIcon={<ArrowForward />}
+        >
+          Continue
+        </Button>
       }
     />
   );

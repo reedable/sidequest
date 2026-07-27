@@ -12,19 +12,19 @@ export default function StrawDrawStep({ onNext, onBack }: Props) {
   return (
     <Page
       title="Here's how it went"
-      actions={
-        <>
-          <Button variant="outlined" onClick={onBack} startIcon={<ArrowBack />}>
-            Back
-          </Button>
-          <Button
-            variant="contained"
-            onClick={onNext}
-            endIcon={<ArrowForward />}
-          >
-            Wait a second…
-          </Button>
-        </>
+      back={
+        <Button variant="outlined" onClick={onBack} startIcon={<ArrowBack />}>
+          Back
+        </Button>
+      }
+      next={
+        <Button
+          variant="contained"
+          onClick={onNext}
+          endIcon={<ArrowForward />}
+        >
+          Wait a second…
+        </Button>
       }
     >
       <Typography variant="h6" component="p" gutterBottom>

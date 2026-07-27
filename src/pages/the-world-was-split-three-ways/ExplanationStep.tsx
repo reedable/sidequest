@@ -94,19 +94,19 @@ export default function ExplanationStep({ onBack, onNext }: Props) {
           </div>
         </div>
       }
-      actions={
-        <>
-          <Button variant="outlined" onClick={onBack} startIcon={<ArrowBack />}>
-            Back
-          </Button>
-          <Button
-            variant="contained"
-            onClick={onNext}
-            endIcon={<ArrowForward />}
-          >
-            Then why not exactly 33%?
-          </Button>
-        </>
+      back={
+        <Button variant="outlined" onClick={onBack} startIcon={<ArrowBack />}>
+          Back
+        </Button>
+      }
+      next={
+        <Button
+          variant="contained"
+          onClick={onNext}
+          endIcon={<ArrowForward />}
+        >
+          Then why not exactly 33%?
+        </Button>
       }
     />
   );

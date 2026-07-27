@@ -12,19 +12,19 @@ export default function QuestionStep({ onNext, onBack }: Props) {
   return (
     <Page
       title="Wait a second..."
-      actions={
-        <>
-          <Button variant="outlined" onClick={onBack} startIcon={<ArrowBack />}>
-            Back
-          </Button>
-          <Button
-            variant="contained"
-            onClick={onNext}
-            endIcon={<ArrowForward />}
-          >
-            Continue
-          </Button>
-        </>
+      back={
+        <Button variant="outlined" onClick={onBack} startIcon={<ArrowBack />}>
+          Back
+        </Button>
+      }
+      next={
+        <Button
+          variant="contained"
+          onClick={onNext}
+          endIcon={<ArrowForward />}
+        >
+          Continue
+        </Button>
       }
     >
       <Typography variant="h6" component="p" gutterBottom>

@@ -143,47 +143,48 @@ export default function ResultsStep({
           })}
         </div>
       }
-      actions={
-        <>
+      back={
+        <Button
+          variant="outlined"
+          onClick={() => onBack(displayStats)}
+          startIcon={<ArrowBack />}
+        >
+          Play again
+        </Button>
+      }
+      controls={
+        /* The round controls sit in the footer's centre slot, beside the
+         * count they change. */
+        <div className={css.AddRounds}>
           <Button
             variant="outlined"
-            onClick={() => onBack(displayStats)}
-            startIcon={<ArrowBack />}
+            disabled={running}
+            onClick={() => addRounds(100, 100)}
           >
-            Play again
+            Add 100 rounds
           </Button>
-
-          {/* The round controls live in the footer, beside the count they change. */}
-          <div className={css.AddRounds}>
-            <Button
-              variant="outlined"
-              disabled={running}
-              onClick={() => addRounds(100, 100)}
-            >
-              Add 100 rounds
-            </Button>
-
-            <Button
-              variant="outlined"
-              disabled={running}
-              onClick={() => addRounds(1000, 20)}
-            >
-              Add 1,000 rounds
-            </Button>
-
-            <Typography variant="h6" component="p" color="text.secondary">
-              {displayStats.rounds} round{displayStats.rounds !== 1 ? "s" : ""}
-            </Typography>
-          </div>
 
           <Button
-            variant="contained"
-            onClick={onNext}
-            endIcon={<ArrowForward />}
+            variant="outlined"
+            disabled={running}
+            onClick={() => addRounds(1000, 20)}
           >
-            Explain
+            Add 1,000 rounds
           </Button>
-        </>
+
+          <Typography variant="h6" component="p" color="text.secondary">
+            {displayStats.rounds} round{displayStats.rounds !== 1 ? "s" : ""}
+          </Typography>
+        </div>
+      }
+      next={
+        <Button
+          variant="contained"
+          onClick={onNext}
+          endIcon={<ArrowForward />}
+        >
+          Explain
+        </Button>
       }
     />
   );

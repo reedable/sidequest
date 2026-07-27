@@ -10,8 +10,12 @@ interface PageProps {
   children?: ReactNode;
   /** The diagram or interactive element. Sits beside the prose when there's room. */
   visual?: ReactNode;
-  /** The Back / Continue row, pinned to the bottom of the viewport. */
-  actions?: ReactNode;
+  /** Footer, left slot. Backward navigation. */
+  back?: ReactNode;
+  /** Footer, centre slot. Controls that act on this step rather than leaving it. */
+  controls?: ReactNode;
+  /** Footer, right slot. Forward navigation. */
+  next?: ReactNode;
   /** Centres everything vertically. Used by the title screen. */
   center?: boolean;
 }
@@ -20,9 +24,13 @@ export default function Page({
   title,
   children,
   visual,
-  actions,
+  back,
+  controls,
+  next,
   center,
 }: PageProps) {
+  const hasFooter = !!(back || controls || next);
+
   return (
     <div className={css.Page}>
       <div className={cx(css.Frame, center && css.FrameCenter)}>
@@ -37,7 +45,13 @@ export default function Page({
           {visual && <div className={css.Visual}>{visual}</div>}
         </div>
 
-        {actions && <div className={css.Actions}>{actions}</div>}
+        {hasFooter && (
+          <div className={css.Actions}>
+            {back && <div className={css.Back}>{back}</div>}
+            {controls && <div className={css.Controls}>{controls}</div>}
+            {next && <div className={css.Next}>{next}</div>}
+          </div>
+        )}
       </div>
     </div>
   );

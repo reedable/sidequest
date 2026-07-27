@@ -392,28 +392,28 @@ export default function SimulationStep({ character, initialRoundNumber = 1, onNe
           </Typography>
         </div>
       }
-      actions={
-        <>
-          <Button variant="outlined" onClick={onBack} startIcon={<ArrowBack />}>
-            Back
-          </Button>
-
-          <Button
-            variant="outlined"
-            onClick={handleDrawAgain}
-            disabled={round.phase !== "complete"}
-          >
-            Draw Again
-          </Button>
-
-          <Button
-            variant="contained"
-            onClick={() => onNext(stats)}
-            endIcon={<ArrowForward />}
-          >
-            See results
-          </Button>
-        </>
+      back={
+        <Button variant="outlined" onClick={onBack} startIcon={<ArrowBack />}>
+          Back
+        </Button>
+      }
+      controls={
+        <Button
+          variant="outlined"
+          onClick={handleDrawAgain}
+          disabled={round.phase !== "complete"}
+        >
+          Draw Again
+        </Button>
+      }
+      next={
+        <Button
+          variant="contained"
+          onClick={() => onNext(stats)}
+          endIcon={<ArrowForward />}
+        >
+          See results
+        </Button>
       }
     />
   );
